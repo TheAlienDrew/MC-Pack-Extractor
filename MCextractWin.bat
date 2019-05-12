@@ -94,22 +94,22 @@ REM Extract the correct files from the choosen version
 
 :oldtexturepack:
 echo Extracting %version% texture pack...
-"%programfiles%\7-Zip\7z.exe" x "%appdata%\.minecraft\versions\%version%\%version%.jar" -o%cd%\mctemp pack.png pack.txt particles.png terrain.png font.txt achievement armor art environment font gui item lang misc mob terrain title -r > nul
+"%programfiles%\7-Zip\7z.exe" x "%appdata%\.minecraft\versions\%version%\%version%.jar" -o"%cd%\mctemp" pack.png pack.txt particles.png terrain.png font.txt achievement armor art environment font gui item lang misc mob terrain title -r > nul
 goto zip
 
 :texturepack:
 echo Extracting %version% texture pack...
-"%programfiles%\7-Zip\7z.exe" x "%appdata%\.minecraft\versions\%version%\%version%.jar" -o%cd%\mctemp pack.png pack.txt particles.png font.txt achievement armor art environment font gui item lang misc mob textures title -r > nul
+"%programfiles%\7-Zip\7z.exe" x "%appdata%\.minecraft\versions\%version%\%version%.jar" -o"%cd%\mctemp" pack.png pack.txt particles.png font.txt achievement armor art environment font gui item lang misc mob textures title -r > nul
 goto zip
 
 :oldresourcepack:
 echo Extracting %version% resource pack...
-"%programfiles%\7-Zip\7z.exe" x "%appdata%\.minecraft\versions\%version%\%version%.jar" -o%cd%\mctemp pack.png pack.mcmeta font.txt assets\minecraft -r > nul
+"%programfiles%\7-Zip\7z.exe" x "%appdata%\.minecraft\versions\%version%\%version%.jar" -o"%cd%\mctemp" pack.png pack.mcmeta font.txt assets\minecraft -r > nul
 goto zip
 
 :resourcepack:
 echo Extracting %version% resource pack...
-"%programfiles%\7-Zip\7z.exe" x "%appdata%\.minecraft\versions\%version%\%version%.jar" -o%cd%\mctemp pack.png pack.mcmeta assets\minecraft -r > nul
+"%programfiles%\7-Zip\7z.exe" x "%appdata%\.minecraft\versions\%version%\%version%.jar" -o"%cd%\mctemp" pack.png pack.mcmeta assets\minecraft -r > nul
 goto zip
 
 REM ZIP the files and delete mctemp
@@ -117,14 +117,14 @@ REM ZIP the files and delete mctemp
 echo Done.
 echo.
 echo Packing into zip file...
-"%programfiles%\7-Zip\7z.exe" a %cd%\MC%version%.zip %cd%\mctemp\* > nul
+"%programfiles%\7-Zip\7z.exe" a "%cd%\MC%version%.zip" "%cd%\mctemp\*" > nul
 echo Done.
 echo.
 echo Cleaning up temporary files...
-rmdir %cd%\mctemp /S /Q
+rmdir "%cd%\mctemp" /S /Q
 echo Done.
 echo.
-echo Resource/Texture pack located at %cd%\MC%version%.zip
+echo Resource/Texture pack located at "%cd%\MC%version%.zip"
 :endme:
 echo.
 pause && exit
