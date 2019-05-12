@@ -89,6 +89,7 @@ if "%version%"=="1.13.1" goto resourcepack
 if "%version%"=="1.13.2" goto resourcepack
 if "%version%"=="1.14" goto resourcepack
 if "%version%"=="1.14.1" goto resourcepack
+if "%version%"=="%version%" goto notsupported
 
 REM Extract the correct files from the choosen version
 
@@ -112,6 +113,9 @@ echo Extracting %version% resource pack...
 "%programfiles%\7-Zip\7z.exe" x "%appdata%\.minecraft\versions\%version%\%version%.jar" -o"%cd%\mctemp" pack.png pack.mcmeta assets\minecraft -r > nul
 goto zip
 
+:notsupported:
+echo Sorry, snapshots, pre-releases, and modded releases are not supported.
+goto endme
 REM ZIP the files and delete mctemp
 :zip:
 echo Done.
