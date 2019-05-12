@@ -2,12 +2,12 @@
 REM This program is designed to allow unpacking of the default Minecraft resources/textures into a resource/texture pack.
 
 echo +---------------------------------------------------+
-echo | Minecraft Resource/Texture Pack Extractor         |
-echo | https://github.com/TheAlienDrew/MC-Pack-Extractor |
+echo ^| Minecraft Resource/Texture Pack Extractor         ^|
+echo ^| https://github.com/TheAlienDrew/MC-Pack-Extractor ^|
 echo +---------------------------------------------------+
-echo | Created by https://github.com/TheAlienDrew/       |
+echo ^| Created by https://github.com/TheAlienDrew/       ^|
 echo +---------------------------------------------------+
-echo | * Only supports downloaded releases               |
+echo ^| * Only supports downloaded releases               ^|
 echo +---------------------------------------------------+
 echo.
 echo.
