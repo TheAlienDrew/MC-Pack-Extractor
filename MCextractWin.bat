@@ -21,12 +21,13 @@ if not exist "%programfiles%\7-Zip\7z.exe" (
 )
 
 REM Get Minecraft version
+set "mcverdir=%appdata%\.minecraft\versions"
 echo Enter the Minecraft version you want to extract from:
 set /p version=
 echo.
 
 REM Version doesn't exist = Can't run
-if not exist "%appdata%\.minecraft\versions\%version%\%version%.jar" (
+if not exist "%mcverdir%\%version%\%version%.jar" (
 	echo Unable to extract because that version isn't downloaded or doesn't exist.
 	echo Make sure to open the launcher and download the version you need to create a pack for.
 	goto endme
@@ -95,37 +96,38 @@ REM Extract the correct files from the choosen version
 
 :oldtexturepack:
 echo Extracting %version% texture pack...
-"%programfiles%\7-Zip\7z.exe" x "%appdata%\.minecraft\versions\%version%\%version%.jar" -o"%cd%\mctemp" pack.png pack.txt particles.png terrain.png font.txt achievement armor art environment font gui item lang misc mob terrain title -r > nul
+"%programfiles%\7-Zip\7z.exe" x "%mcverdir%\%version%\%version%.jar" -o"%tmp%\mctemp" pack.png pack.txt particles.png terrain.png font.txt achievement armor art environment font gui item lang misc mob terrain title -r > nul
 goto zip
 
 :texturepack:
 echo Extracting %version% texture pack...
-"%programfiles%\7-Zip\7z.exe" x "%appdata%\.minecraft\versions\%version%\%version%.jar" -o"%cd%\mctemp" pack.png pack.txt particles.png font.txt achievement armor art environment font gui item lang misc mob textures title -r > nul
+"%programfiles%\7-Zip\7z.exe" x "%mcverdir%\%version%\%version%.jar" -o"%tmp%\mctemp" pack.png pack.txt particles.png font.txt achievement armor art environment font gui item lang misc mob textures title -r > nul
 goto zip
 
 :oldresourcepack:
 echo Extracting %version% resource pack...
-"%programfiles%\7-Zip\7z.exe" x "%appdata%\.minecraft\versions\%version%\%version%.jar" -o"%cd%\mctemp" pack.png pack.mcmeta font.txt assets\minecraft -r > nul
+"%programfiles%\7-Zip\7z.exe" x "%mcverdir%\%version%\%version%.jar" -o"%tmp%\mctemp" pack.png pack.mcmeta font.txt assets\minecraft -r > nul
 goto zip
 
 :resourcepack:
 echo Extracting %version% resource pack...
-"%programfiles%\7-Zip\7z.exe" x "%appdata%\.minecraft\versions\%version%\%version%.jar" -o"%cd%\mctemp" pack.png pack.mcmeta assets\minecraft -r > nul
+"%programfiles%\7-Zip\7z.exe" x "%mcverdir%\%version%\%version%.jar" -o"%tmp%\mctemp" pack.png pack.mcmeta assets\minecraft -r > nul
 goto zip
 
 :notsupported:
 echo Sorry, snapshots, pre-releases, and modded releases are not supported.
 goto endme
+
 REM ZIP the files and delete mctemp
 :zip:
 echo Done.
 echo.
 echo Packing into zip file...
-"%programfiles%\7-Zip\7z.exe" a "%cd%\MC%version%.zip" "%cd%\mctemp\*" > nul
+"%programfiles%\7-Zip\7z.exe" a "%cd%\MC%version%.zip" "%tmp%\mctemp\*" > nul
 echo Done.
 echo.
 echo Cleaning up temporary files...
-rmdir "%cd%\mctemp" /S /Q
+rmdir "%tmp%\mctemp" /S /Q
 echo Done.
 echo.
 echo Resource/Texture pack located at "%cd%\MC%version%.zip"
