@@ -1,4 +1,7 @@
-@echo off && title Minecraft Resource/Texture Pack Extractor && setlocal
+@echo off
+setlocal
+title Minecraft Resource/Texture Pack Extractor
+set "origindir=%cd%"
 REM This program is designed to allow unpacking of the default Minecraft resources/textures into a resource/texture pack.
 
 echo +---------------------------------------------------+
@@ -8,16 +11,19 @@ echo +---------------------------------------------------+
 echo ^| Created by https://github.com/TheAlienDrew/       ^|
 echo +---------------------------------------------------+
 echo ^| * Only supports downloaded releases               ^|
-echo +---------------------------------------------------+
-echo.
-echo.
-echo.
+echo +---------------------------------------------------+ && echo. && echo. && echo.
 
-REM No 7-Zip = Can't run
+REM No 7-Zip = Use system vbs commands
+set /A use7z=1
 if not exist "%programfiles%\7-Zip\7z.exe" (
-	echo Unable to run because 7-Zip isn't installed.
-	echo 7-Zip can be installed by going to https://www.7-zip.org/download.html
-	goto endme
+	echo 7-Zip isn't installed, but you can install it by going to https://www.7-zip.org/download.html
+	echo Would you like to use the system zip/unzip instead? && echo.
+	echo Press [Ctrl]+[C] to exit or && pause
+		REM CURRENTLY UNDER DEVELOPMENT
+		goto endme
+	echo.
+	
+	set /A use7z=0
 )
 
 REM Get Minecraft version
@@ -34,6 +40,7 @@ if not exist "%mcverdir%\%version%\%version%.jar" (
 )
 
 REM Determine pack extraction
+:versions
 if "%version%"=="1.0" goto oldtexturepack
 if "%version%"=="1.1" goto oldtexturepack
 if "%version%"=="1.2.1" goto oldtexturepack
@@ -90,7 +97,7 @@ if "%version%"=="1.13.1" goto resourcepack
 if "%version%"=="1.13.2" goto resourcepack
 if "%version%"=="1.14" goto resourcepack
 if "%version%"=="1.14.1" goto resourcepack
-if "%version%"=="%version%" goto notsupported
+if "%version%"=="%version%" ( echo Sorry, snapshots, pre-releases, and modded releases are not supported. && goto endme )
 
 REM Extract the correct files from the choosen version
 
@@ -112,25 +119,14 @@ goto zip
 :resourcepack:
 echo Extracting %version% resource pack...
 "%programfiles%\7-Zip\7z.exe" x "%mcverdir%\%version%\%version%.jar" -o"%tmp%\mctemp" pack.png pack.mcmeta assets\minecraft -r > nul
-goto zip
-
-:notsupported:
-echo Sorry, snapshots, pre-releases, and modded releases are not supported.
-goto endme
 
 REM ZIP the files and delete mctemp
 :zip:
-echo Done.
-echo.
-echo Packing into zip file...
-"%programfiles%\7-Zip\7z.exe" a "%cd%\MC%version%.zip" "%tmp%\mctemp\*" > nul
-echo Done.
-echo.
-echo Cleaning up temporary files...
-rmdir "%tmp%\mctemp" /S /Q
-echo Done.
-echo.
-echo Resource/Texture pack located at "%cd%\MC%version%.zip"
+echo Done. && echo. && echo Packing into zip file...
+"%programfiles%\7-Zip\7z.exe" a "%origindir%\MC%version%.zip" "%tmp%\mctemp\*" > nul
+echo Done. && echo. && echo Cleaning up temporary files...
+if exist "%tmp%\mctemp" rmdir "%tmp%\mctemp" /S /Q
+echo Done. && echo.
+echo Resource/Texture pack located at "%origindir%\MC%version%.zip"
 :endme:
-echo.
-pause && exit
+echo. && pause && exit
