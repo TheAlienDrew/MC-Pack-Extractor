@@ -1,6 +1,4 @@
 # MC-Pack-Extractor
 No matter what system you have, a script has been made to extract the resource or texture pack from the Minecraft version of your choosing.
 
-Available: MCextractWin.bat (Windows) & MCextractLin.sh (Linux)
-
-Coming Soon: MCextractMac.sh (Mac)
+NOW AVAILABLE: MCextractWin.bat (Windows) & MCextractNix.sh (Linux/Mac)
