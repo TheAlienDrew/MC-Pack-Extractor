@@ -6,4 +6,4 @@ WORKING ON WINDOWS AND LINUX!
 
 * Features still to implement:
   - Windows version doesn't have a system based zip/unzip backup for when someone can't use 7-Zip
-  - Sounds aren't currently bundled with the resource packs, but is planned. > For now just use https://minecraft.gamepedia.com/Tutorials/Sound_directory#Extracting_Minecraft_Music
+  - Sounds aren't currently bundled with the resource packs, but is planned. > For now just use https://minecraft.gamepedia.com/Tutorials/Sound_directory
