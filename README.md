@@ -1,7 +1,8 @@
 # MC-Pack-Extractor
 No matter what system you have, a script has been made to extract the resource or texture pack from the Minecraft version of your choosing.
 
-WORKING ON WINDOWS, LINUX, AND MAC!
+WORKING ON WINDOWS LINUX!
+- Yes, am aware now that Mac's have a different directory than Linux... I'll be working on a fix for that soon.
 
 * Features still to implement:
   - Windows version doesn't have a system based zip/unzip backup for when someone can't use 7-Zip
