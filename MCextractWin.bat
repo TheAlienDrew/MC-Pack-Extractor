@@ -15,7 +15,6 @@ echo +---------------------------------------------------+ && echo. && echo. && 
 
 REM No 7-Zip = Use system vbs commands
 set /A use7z=1
-set "mcverdir=%appdata%\.minecraft\versions"
 if not exist "%programfiles%\7-Zip\7z.exe" (
 	echo 7-Zip isn't installed, but you can install it by going to https://www.7-zip.org/download.html
 	echo Would you like to use the system zip/unzip instead? && echo.
@@ -28,6 +27,7 @@ if not exist "%programfiles%\7-Zip\7z.exe" (
 )
 
 REM Get Minecraft version
+set "mcverdir=%appdata%\.minecraft\versions"
 echo Enter the Minecraft version you want to extract from:
 set /p version=
 echo.
