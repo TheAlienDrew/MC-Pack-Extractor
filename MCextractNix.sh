@@ -3,14 +3,6 @@ title="Minecraft Resource/Texture Pack Extractor"
 echo -e '\033]2;'$title'\007'
 origindir=$PWD
 unameOut="$(uname -s)"
-case "${unameOut}" in
-    Linux*)     machine=Linux;;
-    Darwin*)    machine=Mac;;
-    CYGWIN*)    machine=Cygwin;;
-    MINGW*)     machine=MinGw;;
-    *)          machine="UNKNOWN:${unameOut}"
-esac
-echo ${machine}
 # This program is designed to allow unpacking of the default Minecraft resources/textures into a resource/texture pack.
 
 echo -e "+---------------------------------------------------+"
@@ -25,9 +17,9 @@ echo -e "+---------------------------------------------------+\n\n\n"
 # No p7zip = Use Info-Zip
 use7z=true
 if ! type "7z" > /dev/null 2>&1; then
-	if ($machine == Linux); then
+	if [ $(echo ${unameOut} | grep Linux) ]; then
 		echo -e "7-Zip isn't installed, but you can install it by running \"sudo apt install p7zip\""
-	elif ($machine == Mac); then
+	elif [ $(echo ${unameOut} | grep Darwin) ]; then
 		echo -e "7-Zip isn't installed, but you can install it by running \"brew install p7zip\" (if you run Homebrew)"
 	else
 		echo -e "Sorry, but $machine is not supported."
@@ -41,10 +33,8 @@ if ! type "7z" > /dev/null 2>&1; then
 fi
 
 # Get Minecraft version
-mcverdir="/"
-if ("$machine" == "Linux"); then
-	mcverdir=$(echo ~/.minecraft/versions | grep mine)
-elif ("$machine" == "Mac"); then
+mcverdir=$(echo ~/.minecraft/versions | grep mine)
+if [ $(echo ${unameOut} | grep Darwin) ]; then
 	mcverdir=$(echo ~/Library/Application Support/minecraft/versions | grep mine)
 fi
 echo -e "Enter the Minecraft version you want to extract from:"
@@ -52,7 +42,7 @@ read version
 echo
 
 # Version doesn't exist = Can't run
-if [ ! -f $mcverdir/$version/$version.jar ]; then
+if [[ ! -f ${mcverdir}/${version}/${version}.jar ]]; then
 	echo -e "Unable to extract because that version isn't downloaded or doesn't exist."
 	echo -e "Make sure to open the launcher and download the version you need to create a pack for.\n"
 	read -p "Press [Enter] key to continue..." && exit
