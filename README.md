@@ -12,7 +12,7 @@ Screenshots Windows:
 ![Script on startup](https://i.postimg.cc/XJTpHpR7/1win.png)
 ![Script after entering version](https://i.postimg.cc/mkCh0T43/2win.png)
 
-Screenshots Linux:
+Screenshots Linux (via WSL):
 ![Script on startup](https://i.postimg.cc/pT9mJD16/1lin.png)
 ![Script after entering version](https://i.postimg.cc/59CHHSzH/2lin.png)
 
