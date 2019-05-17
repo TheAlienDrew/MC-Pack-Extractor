@@ -13,6 +13,9 @@ echo +---------------------------------------------------+
 echo ^| * Only supports downloaded releases               ^|
 echo +---------------------------------------------------+ && echo. && echo. && echo.
 
+REM Delete previous temporary folder(s) if needed
+if exist "%tmp%\mctemp" rmdir "%tmp%\mctemp" /S /Q
+
 REM No 7-Zip = Use system vbs commands
 set /A use7z=1
 if not exist "%programfiles%\7-Zip\7z.exe" (
