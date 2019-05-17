@@ -14,6 +14,14 @@ echo -e "+---------------------------------------------------+"
 echo -e "| * Only supports downloaded releases               |"
 echo -e "+---------------------------------------------------+\n\n\n"
 
+# Delete previous temporary folder(s) if needed
+if [ ! -f /tmp/mctemp2 ]; then
+	rm -rf "/tmp/mctemp2"
+fi
+if [ ! -f /tmp/mctemp ]; then
+	rm -rf "/tmp/mctemp"
+fi
+
 # No p7zip = Use Info-Zip
 use7z=true
 if ! type "7z" > /dev/null 2>&1; then
