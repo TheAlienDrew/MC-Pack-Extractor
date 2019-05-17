@@ -8,7 +8,7 @@ COMPATIBILITY: Windows, Mac, & Linux!
   - Sounds aren't currently bundled with the resource packs, but is planned. > For now just use [this](https://minecraft.gamepedia.com/Tutorials/Sound_directory)
   - Currently only supports Minecraft: Java Edition, but support is planned for Minecraft: Bedrock Edition (Windows 10 and Android Only so far it seems)
 
-Minecraft Forum [here](https://i.postimg.cc/tCdYkR2p/4win.png)
+Minecraft Forum [here](https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/resource-packs/resource-pack-discussion/2962634-script-minecraft-default-pack-extractor)
 
 <details><summary>Screenshots Windows</summary>
 <p>
