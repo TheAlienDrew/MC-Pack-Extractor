@@ -12,21 +12,27 @@ Minecraft Forum [here](https://i.postimg.cc/tCdYkR2p/4win.png)
 
 <details><summary>Screenshots Windows</summary>
 <p>
+  
 ![Script on startup](https://i.postimg.cc/XJTpHpR7/1win.png)
 ![Script after entering version](https://i.postimg.cc/mkCh0T43/2win.png)
+
 </p>
 </details>
 
 <details><summary>Screenshots Linux (via WSL)</summary>
 <p>
+  
 ![Script on startup](https://i.postimg.cc/pT9mJD16/1lin.png)
 ![Script after entering version](https://i.postimg.cc/59CHHSzH/2lin.png)
+
 </p>
 </details>
 
 <details><summary>Screenshots Example Extraction</summary>
 <p>
+  
 ![Where it archived to](https://i.postimg.cc/ZKzW6vPw/3win.png)
 ![What's inside it](https://i.postimg.cc/tCdYkR2p/4win.png)
+
 </p>
 </details>
