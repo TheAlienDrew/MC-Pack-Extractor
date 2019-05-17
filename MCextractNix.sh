@@ -25,9 +25,9 @@ echo -e "+---------------------------------------------------+\n\n\n"
 # No p7zip = Use Info-Zip
 use7z=true
 if ! type "7z" > /dev/null 2>&1; then
-	if ("$machine" == "Linux"); then
+	if ($machine == Linux); then
 		echo -e "7-Zip isn't installed, but you can install it by running \"sudo apt install p7zip\""
-	elif ("$machine" == "Mac"); then
+	elif ($machine == Mac); then
 		echo -e "7-Zip isn't installed, but you can install it by running \"brew install p7zip\" (if you run Homebrew)"
 	else
 		echo -e "Sorry, but $machine is not supported."
@@ -45,7 +45,7 @@ mcverdir="/"
 if ("$machine" == "Linux"); then
 	mcverdir=$(echo ~/.minecraft/versions | grep mine)
 elif ("$machine" == "Mac"); then
-		mcverdir=$(echo ~/Library/Application Support/minecraft/versions | grep mine)
+	mcverdir=$(echo ~/Library/Application Support/minecraft/versions | grep mine)
 fi
 echo -e "Enter the Minecraft version you want to extract from:"
 read version
