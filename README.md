@@ -1,5 +1,6 @@
 # MC-Pack-Extractor
 No matter what system you have, a script has been made to extract the resource or texture pack from the Minecraft version of your choosing.
+Do note that this script only works on the official versions that the [Minecraft Launcher](https://minecraft.gamepedia.com/Java_Edition_launcher) downloads.
 
 COMPATIBILITY: Windows, Mac, & Linux!
 
