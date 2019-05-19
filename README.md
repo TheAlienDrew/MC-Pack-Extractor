@@ -39,6 +39,6 @@ Minecraft Forum [here](https://www.minecraftforum.net/forums/mapping-and-modding
 </details>
 
 Self Note:
-Bedrock Default Resource Pack (Directories on certain systems)...
-- Windows 10: C:\Program Files\WindowsApps\Microsoft.MinecraftUWP_1.11.102.0_x64__8wekyb3d8bbwe\data\resource_packs
-- Android: (path is different on any device; use command `pm path com.mojang.minecraftpe` in terminal to find)
+Bedrock Default Resource Pack (Directories on certain systems)... (paths are not solid)
+- Windows 10: `ls C:\Program Files\WindowsApps\ | find "Minecraft"` as admin in Powershell, then go to `data\resource_packs`
+- Android: `pm path com.mojang.minecraftpe` in terminal to find app path, use the `base.apk` with 7z to extract resource files from `assets/resource_packs/`
