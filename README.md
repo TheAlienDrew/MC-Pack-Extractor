@@ -5,10 +5,10 @@ Do note that this script only works on the official versions that the [Minecraft
 COMPATIBILITY: Windows, Mac, & Linux!
 
 * Features still left to implement:
-  - Windows version doesn't have a system based zip/unzip backup for when someone can't use 7-Zip
-  - Sounds aren't currently bundled with the resource packs, but is planned. > For now just use [this](https://minecraft.gamepedia.com/Tutorials/Sound_directory)
-  - Currently only supports Minecraft: Java Edition, but support is planned for Minecraft: Bedrock Edition (Windows 10 and Android Only so far it seems)
-  * Probably going to achive this when this support is added to my [MC Pack Workbench](https://thealiendrew.github.io/mcpw)
+  - Built-in zip/unzip support for Windows
+  - Extract sounds with the packs... For now just use [this](https://minecraft.gamepedia.com/Tutorials/Sound_directory)
+  - Support for Minecraft: Bedrock Edition 
+  * Probably going to achive this when I program these features to my [MC Pack Workbench](https://thealiendrew.github.io/mcpw)
 
 Links:
   - [Minecraft Forum (old)](https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/resource-packs/resource-pack-discussion/2962634-script-minecraft-default-pack-extractor)
