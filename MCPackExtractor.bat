@@ -1,11 +1,11 @@
 @echo off
 setlocal
-title Minecraft Resource/Texture Pack Extractor
+title Minecraft Pack Extractor
 set "origindir=%cd%"
-REM This program is designed to allow unpacking of the default Minecraft resources/textures into a resource/texture pack.
+REM This program is designed to allow unpacking of the default Minecraft resources into a resource/texture pack.
 
 echo +---------------------------------------------------+
-echo ^| Minecraft Resource/Texture Pack Extractor         ^|
+echo ^| Minecraft Pack Extractor                          ^|
 echo ^| https://github.com/TheAlienDrew/MC-Pack-Extractor ^|
 echo +---------------------------------------------------+
 echo ^| Created by https://github.com/TheAlienDrew/       ^|
