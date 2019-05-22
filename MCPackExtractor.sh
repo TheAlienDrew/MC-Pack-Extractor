@@ -1,12 +1,12 @@
 #!/bin/bash
-title="Minecraft Resource/Texture Pack Extractor"
+title="Minecraft Pack Extractor"
 echo -e '\033]2;'$title'\007'
 origindir=$PWD
 unameOut="$(uname -s)"
-# This program is designed to allow unpacking of the default Minecraft resources/textures into a resource/texture pack.
+# This program is designed to allow unpacking of the default Minecraft resources into a resource/texture pack.
 
 echo -e "+---------------------------------------------------+"
-echo -e "| Minecraft Resource/Texture Pack Extractor         |"
+echo -e "| Minecraft Pack Extractor                          |"
 echo -e "| https://github.com/TheAlienDrew/MC-Pack-Extractor |"
 echo -e "+---------------------------------------------------+"
 echo -e "| Created by https://github.com/TheAlienDrew/       |"
