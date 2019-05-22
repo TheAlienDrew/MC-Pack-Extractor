@@ -1,5 +1,5 @@
 # MC-Pack-Extractor
-No matter what system you have, a script has been made to extract the resource or texture pack from the Minecraft version of your choosing.
+
 Do note that this script only works on the official versions that the [Minecraft Launcher](https://minecraft.gamepedia.com/Java_Edition_launcher) downloads.
 
 COMPATIBILITY: Windows, Mac, & Linux!
@@ -8,8 +8,10 @@ COMPATIBILITY: Windows, Mac, & Linux!
   - Windows version doesn't have a system based zip/unzip backup for when someone can't use 7-Zip
   - Sounds aren't currently bundled with the resource packs, but is planned. > For now just use [this](https://minecraft.gamepedia.com/Tutorials/Sound_directory)
   - Currently only supports Minecraft: Java Edition, but support is planned for Minecraft: Bedrock Edition (Windows 10 and Android Only so far it seems)
+  * Probably going to achive this when this support is added to my [MC Pack Workbench](https://thealiendrew.github.io/mcpw)
 
-Minecraft Forum [here](https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/resource-packs/resource-pack-discussion/2962634-script-minecraft-default-pack-extractor)
+Links:
+  - [Minecraft Forum (old)](https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/resource-packs/resource-pack-discussion/2962634-script-minecraft-default-pack-extractor)
 
 <details><summary>Screenshots Windows</summary>
 <p>
