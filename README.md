@@ -42,5 +42,5 @@ Links:
 
 Self Note:
 Bedrock Default Resource Pack (Directories on certain systems)... (paths are not solid)
-- Windows 10: `ls C:\Program Files\WindowsApps\ | find "Minecraft"` as admin in Powershell to find app path, then go to `data\resource_packs`
+- Windows 10: `ls "C:\Program Files\WindowsApps\" | findstr "Minecraft"` as admin in Powershell to find app path, then go to `data\resource_packs`
 - Android: `pm path com.mojang.minecraftpe` in terminal to find app path, use the `base.apk` with 7z to extract resource files from `assets/resource_packs/`
