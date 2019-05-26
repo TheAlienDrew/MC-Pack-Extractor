@@ -4,14 +4,14 @@ Do note that this script only works on the official versions that the [Minecraft
 
 COMPATIBILITY: Windows, Mac, & Linux!
 
-* Features still let to implement:
-  1. Built-in zip/unzip support for Windows (coming soon thanks to `https://github.com/npocmaka/batch.scripts/blob/master/hybrids/jscript/zipjs.bat`)
-  2. Extract sounds with the packs... For now just use [this](https://minecraft.gamepedia.com/Tutorials/Sound_directory)
-  3. Support for Minecraft: Bedrock Edition 
+* Features still left to implement:
+  1. Extract sounds with the packs... For now just use [this](https://minecraft.gamepedia.com/Tutorials/Sound_directory)
+  2. Support for Minecraft: Bedrock Edition 
   - Probably going to achive this when I program these features to my [MC Pack Workbench](https://thealiendrew.github.io/mcpw)
 
 Links:
   - [Minecraft Forum (old)](https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/resource-packs/resource-pack-discussion/2962634-script-minecraft-default-pack-extractor)
+  - [Zip/Unzip Batch file created by npocmaka](https://github.com/npocmaka/batch.scripts/blob/master/hybrids/jscript/zipjs.bat)
 
 <details><summary>Screenshots Windows</summary>
 <p>
