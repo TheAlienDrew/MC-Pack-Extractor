@@ -15,9 +15,8 @@ echo -e "| * Only supports downloaded releases               |"
 echo -e "+---------------------------------------------------+\n\n\n"
 
 # Delete previous temporary folder(s) if needed
-if [ ! -f ${tmpfolder1} ]; then
-	rm -rf "$tmpfolder"
-fi
+if [ ! -f ${tmpfolder} ]; then rm -rf "$tmpfolder"; fi
+Minor change to tmpfolder if statement in the beginning and end
 
 # No p7zip = Use Info-Zip
 use7z=true
@@ -95,9 +94,7 @@ else
 	cd "$tmpfolder" && zip -qr "$origindir/MC$version.zip" * && cd "$origindir"
 fi
 echo -e "Done.\n\nCleaning up temporary files..."
-if [ ! -f ${tmpfolder} ]; then
-	rm -rf "$tmpfolder"
-fi
+if [ ! -f ${tmpfolder} ]; then rm -rf "$tmpfolder"; fi
 echo -e "Done.\n"
 echo -e "Resource/Texture pack located at $origindir/MC$version.zip\n"
 read -p "Press [Enter] key to continue..." && exit
