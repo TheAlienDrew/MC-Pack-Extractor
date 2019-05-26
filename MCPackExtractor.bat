@@ -2,6 +2,7 @@
 setlocal
 title Minecraft Pack Extractor
 set "origindir=%cd%"
+set "tmpfolder=%tmp%\mcpackextractor"
 REM This program is designed to allow unpacking of the default Minecraft resources into a resource/texture pack.
 
 echo +---------------------------------------------------+
@@ -14,7 +15,7 @@ echo ^| * Only supports downloaded releases               ^|
 echo +---------------------------------------------------+ && echo. && echo. && echo.
 
 REM Delete previous temporary folder(s) if needed
-if exist "%tmp%\mctemp" rmdir "%tmp%\mctemp" /S /Q
+if exist "%tmpfolder%" rmdir "%tmpfolder%" /S /Q
 
 REM No 7-Zip = Use system vbs commands
 set /A use7z=1
@@ -104,32 +105,32 @@ if "%version%"=="%version%" ( echo Sorry, snapshots, pre-releases, and modded re
 
 REM Extract the correct files from the choosen version
 
-:oldtexturepack:
+:oldtexturepack
 echo Extracting %version% texture pack...
-"%programfiles%\7-Zip\7z.exe" x "%mcverdir%\%version%\%version%.jar" -o"%tmp%\mctemp" pack.png pack.txt particles.png terrain.png font.txt achievement armor art environment font gui item lang misc mob terrain title -r > nul
+"%programfiles%\7-Zip\7z.exe" x "%mcverdir%\%version%\%version%.jar" -o"%tmpfolder%" pack.png pack.txt particles.png terrain.png font.txt achievement armor art environment font gui item lang misc mob terrain title -r > nul
 goto zip
 
-:texturepack:
+:texturepack
 echo Extracting %version% texture pack...
-"%programfiles%\7-Zip\7z.exe" x "%mcverdir%\%version%\%version%.jar" -o"%tmp%\mctemp" pack.png pack.txt particles.png font.txt achievement armor art environment font gui item lang misc mob textures title -r > nul
+"%programfiles%\7-Zip\7z.exe" x "%mcverdir%\%version%\%version%.jar" -o"%tmpfolder%" pack.png pack.txt particles.png font.txt achievement armor art environment font gui item lang misc mob textures title -r > nul
 goto zip
 
-:oldresourcepack:
+:oldresourcepack
 echo Extracting %version% resource pack...
-"%programfiles%\7-Zip\7z.exe" x "%mcverdir%\%version%\%version%.jar" -o"%tmp%\mctemp" pack.png pack.mcmeta font.txt assets\minecraft -r > nul
+"%programfiles%\7-Zip\7z.exe" x "%mcverdir%\%version%\%version%.jar" -o"%tmpfolder%" pack.png pack.mcmeta font.txt assets\minecraft -r > nul
 goto zip
 
-:resourcepack:
+:resourcepack
 echo Extracting %version% resource pack...
-"%programfiles%\7-Zip\7z.exe" x "%mcverdir%\%version%\%version%.jar" -o"%tmp%\mctemp" pack.png pack.mcmeta assets\minecraft -r > nul
+"%programfiles%\7-Zip\7z.exe" x "%mcverdir%\%version%\%version%.jar" -o"%tmpfolder%" pack.png pack.mcmeta assets\minecraft -r > nul
 
-REM ZIP the files and delete mctemp
-:zip:
+REM ZIP the files and delete tmpfolder
+:zip
 echo Done. && echo. && echo Packing into zip file...
-"%programfiles%\7-Zip\7z.exe" a "%origindir%\MC%version%.zip" "%tmp%\mctemp\*" > nul
+"%programfiles%\7-Zip\7z.exe" a "%origindir%\MC%version%.zip" "%tmpfolder%\*" > nul
 echo Done. && echo. && echo Cleaning up temporary files...
-if exist "%tmp%\mctemp" rmdir "%tmp%\mctemp" /S /Q
+if exist "%tmpfolder%" rmdir "%tmpfolder%" /S /Q
 echo Done. && echo.
 echo Resource/Texture pack located at "%origindir%\MC%version%.zip"
-:endme:
+:endme
 echo. && pause && exit
