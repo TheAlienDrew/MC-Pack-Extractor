@@ -37,11 +37,10 @@ fi
 
 # Get Minecraft version
 mcverdir=$(echo ~/.minecraft/versions | grep mine)
-if [ $(echo ${unameOut} | grep Darwin) ]; then
-	mcverdir=$(echo ~/Library/Application Support/minecraft/versions | grep mine)
-fi
+if [ $(echo ${unameOut} | grep Darwin) ]; then mcverdir=$(echo ~/Library/Application Support/minecraft/versions | grep mine); fi
 echo -e "Enter the Minecraft version you want to extract from:"
 read version
+mcjardir="$mcverdir/$version/$version.jar"
 echo
 
 # Version doesn't exist = Can't run
@@ -56,36 +55,36 @@ case "$version" in
 	("1.0" | "1.1" | "1.2.1" | "1.2.2" | "1.2.3" | "1.2.4" | "1.2.5" | "1.3.1" | "1.3.2" | "1.4.2" | "1.4.4" | "1.4.5" | "1.4.6" | "1.4.7")
 		echo -e "Extracting $version texture pack..."
 		if ($use7z); then
-			7z x "$mcverdir/$version/$version.jar" -o"$tmpfolder" pack.png pack.txt particles.png terrain.png font.txt achievement armor art environment font gui item lang misc mob terrain title -r >/dev/null 2>&1
+			7z x "$mcjardir" -o"$tmpfolder" pack.png pack.txt particles.png terrain.png font.txt achievement armor art environment font gui item lang misc mob terrain title -r >/dev/null 2>&1
 		else
-			unzip -q "$mcverdir/$version/$version.jar" pack.png pack.txt particles.png terrain.png font.txt achievement/*.* armor/*.* art/*.* environment/*.* font/*.* gui/*.* item/*.* lang/*.* misc/*.* mob/*.* terrain/*.* title/*.* -d "$tmpfolder"
+			unzip -q "$mcjardir" pack.png pack.txt particles.png terrain.png font.txt achievement/*.* armor/*.* art/*.* environment/*.* font/*.* gui/*.* item/*.* lang/*.* misc/*.* mob/*.* terrain/*.* title/*.* -d "$tmpfolder"
 		fi ;;
 	("1.5.1" | "1.5.2")
 		echo -e "Extracting $version texture pack..."
 		if ($use7z); then
-			7z x "$mcverdir/$version/$version.jar" -o"$tmpfolder" pack.png pack.txt particles.png font.txt achievement armor art environment font gui item lang misc mob textures title -r >/dev/null 2>&1
+			7z x "$mcjardir" -o"$tmpfolder" pack.png pack.txt particles.png font.txt achievement armor art environment font gui item lang misc mob textures title -r >/dev/null 2>&1
 		else
-			unzip -q "$mcverdir/$version/$version.jar" pack.png pack.txt particles.png font.txt achievement/*.* armor/*.* art/*.* environment/*.* font/*.* gui/*.* item/*.* lang/*.* misc/*.* mob/*.* textures/*.* title/*.* -d "$tmpfolder"
+			unzip -q "$mcjardir" pack.png pack.txt particles.png font.txt achievement/*.* armor/*.* art/*.* environment/*.* font/*.* gui/*.* item/*.* lang/*.* misc/*.* mob/*.* textures/*.* title/*.* -d "$tmpfolder"
 		fi ;;
 	("1.6.1" | "1.6.2" | "1.6.4")
 		echo -e "Extracting $version resource pack..."
 		if ($use7z); then
-			7z x "$mcverdir/$version/$version.jar" -o"$tmpfolder" pack.png pack.mcmeta font.txt assets/minecraft -r >/dev/null 2>&1
+			7z x "$mcjardir" -o"$tmpfolder" pack.png pack.mcmeta font.txt assets/minecraft -r >/dev/null 2>&1
 		else
-			unzip -q "$mcverdir/$version/$version.jar" pack.png pack.mcmeta font.txt assets/minecraft/*.* -d "$tmpfolder"
+			unzip -q "$mcjardir" pack.png pack.mcmeta font.txt assets/minecraft/*.* -d "$tmpfolder"
 		fi ;;
 	("1.7.2" | "1.7.3" | "1.7.4" | "1.7.5" | "1.7.6" | "1.7.7" | "1.7.8" | "1.7.9" | "1.7.10" | "1.8" | "1.8.1" | "1.8.2" | "1.8.3" | "1.8.4" | "1.8.5" | "1.8.6" | "1.8.7" | "1.8.8" | "1.8.9" | "1.9" | "1.9.1" | "1.9.2" | "1.9.3" | "1.9.4" | "1.10" | "1.10.1" | "1.10.2" | "1.11" | "1.11.1" | "1.11.2" | "1.12" | "1.12.2" | "1.13" | "1.13.1" | "1.13.2" | "1.14" | "1.14.1") 
 		echo -e "Extracting $version resource pack..."
 		if ($use7z); then
-			7z x "$mcverdir/$version/$version.jar" -o"$tmpfolder" pack.png pack.mcmeta assets/minecraft -r >/dev/null 2>&1
+			7z x "$mcjardir" -o"$tmpfolder" pack.png pack.mcmeta assets/minecraft -r >/dev/null 2>&1
 		else
-			unzip -q "$mcverdir/$version/$version.jar" pack.png pack.mcmeta assets/minecraft/*.* -d "$tmpfolder"
+			unzip -q "$mcjardir" pack.png pack.mcmeta assets/minecraft/*.* -d "$tmpfolder"
 		fi ;;
 	(*)
 		echo "Sorry, snapshots, pre-releases, and modded releases are not supported." ;;
 esac
 
-# ZIP the files and delete tmpfolder
+# ZIP the files and delete temporary files
 echo -e "Done.\n\nPacking into zip file..."
 if ($use7z); then
 	7z a "$origindir/MC$version.zip" "$tmpfolder/*" >/dev/null 2>&1
