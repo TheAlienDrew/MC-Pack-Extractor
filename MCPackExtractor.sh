@@ -16,7 +16,6 @@ echo -e "+---------------------------------------------------+\n\n\n"
 
 # Delete previous temporary folder(s) if needed
 if [ ! -f ${tmpfolder} ]; then rm -rf "$tmpfolder"; fi
-Minor change to tmpfolder if statement in the beginning and end
 
 # No p7zip = Use Info-Zip
 use7z=true
