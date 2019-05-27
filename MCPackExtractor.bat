@@ -111,6 +111,7 @@ if "%version%"=="1.13.1" goto resourcepack
 if "%version%"=="1.13.2" goto resourcepack
 if "%version%"=="1.14" goto resourcepack
 if "%version%"=="1.14.1" goto resourcepack
+if "%version%"=="1.14.2" goto resourcepack
 if "%version%"=="%version%" ( echo Sorry, snapshots, pre-releases, and modded releases are not supported. && goto endme )
 
 REM Extract the correct files from the choosen version
