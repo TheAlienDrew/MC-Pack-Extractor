@@ -1,60 +1,77 @@
-@echo off
-setlocal
+@echo off && setlocal
 title Minecraft Pack Extractor
 set "origindir=%cd%"
 set "tmpfolder=%tmp%\mcpackextractor"
 set "tmpunzip=%tmpfolder%\unzip"
+set "_7z=%programfiles%\7-Zip\7z.exe" && set "zipbat=%tmp%\zipjs.bat"
 REM This program is designed to allow unpacking of the default Minecraft resources into a resource/texture pack.
 
-echo +---------------------------------------------------+
-echo ^| Minecraft Pack Extractor                          ^|
-echo ^| https://github.com/TheAlienDrew/MC-Pack-Extractor ^|
-echo +---------------------------------------------------+
-echo ^| Created by https://github.com/TheAlienDrew/       ^|
-echo +---------------------------------------------------+
-echo ^| * Only supports downloaded releases               ^|
-echo +---------------------------------------------------+ && echo. && echo. && echo.
+echo. && echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
+echo +             Minecraft Pack Extractor              +
+echo +        Created by TheAlien Drew on GitHub         +
+echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
+echo + https://github.com/TheAlienDrew/MC-Pack-Extractor +
+echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
+echo +         Only supports downloaded releases         +
+echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-REM Delete previous temporary folder(s) if needed
-if exist "%tmpfolder%" rmdir "%tmpfolder%" /S /Q
+REM Delete previous temporary folder if needed
+if exist "%tmpfolder%" ( rmdir "%tmpfolder%" /S /Q && del "%tmpfolder%" >NUL 2>&1 )
 
 REM No 7-Zip = Use internal batch file courtesy of npocmaka: https://github.com/npocmaka/batch.scripts/blob/master/hybrids/jscript/zipjs.bat
-set "_7z=%programfiles%\7-Zip\7z.exe"
-set "zipbat=%tmp%\zipjs.bat"
-if exist "%_7z%" set /A use7z=1
-if not exist "%_7z%" set /A use7z=0
-if %use7z% neq 1 (
-	echo 7-Zip isn't installed, but you can install it by going to https://www.7-zip.org/download.html
-	echo Would you like to use the system zip/unzip instead? && echo.
-	echo Press [Ctrl]+[C] to exit or && pause
+set /A use7z=0 && if not exist "%_7z%" set /A use7z=1
+set "no7z=Would you like to use the system's zip/unzip instead (Y/N)?"
+if %use7z% neq 0 (
 	echo.
-	call :createZipBat
-	mkdir "%tmpfolder%"
-	mkdir "%tmpunzip%"
+	if "%os%"=="Windows_NT" (
+		echo 7-Zip isn't installed, but you can install it by going to "https://www.7-zip.org/download.html"
+	) else (
+		echo Sorry, but %os% is not supported.
+		goto endme
+	)
+	where choice >NUL 2>&1
+	if errorlevel 1 (
+		echo.
+		call :MsgBox "%no7z%" "VBYesNo+VBQuestion" "Continue?"
+		if errorlevel 7 (
+			echo|set/p"=%no7z% N"
+			echo. && goto :EOF
+		) else if errorlevel 6 (
+			echo|set/p"=%no7z% Y"
+			echo. && call :createZipBat
+		)
+	) else echo. && choice /N /M "%no7z% " && if errorlevel 2 ( goto :EOF ) else if errorlevel 1 ( call :createZipBat ) else goto :EOF
+	mkdir "%tmpfolder%" && mkdir "%tmpunzip%"
 )
+echo. && echo. && echo.
 
 REM Get Minecraft version
 set "mcverdir=%appdata%\.minecraft\versions"
-echo Enter the Minecraft version you want to extract from:
-set /p version=
+REM echo Versions Installed:
+REM dir "%mcverdir%" && echo.
+:versionPrompt
+set /p "version=Enter the version you want to extract from: " || goto versionPrompt
+if [%version%]==[] goto versionPrompt
 set "mcjardir=%mcverdir%\%version%\%version%.jar"
 echo.
 
 REM Version doesn't exist = Can't run
 if not exist "%mcjardir%" (
-	echo Unable to extract because that version isn't downloaded or doesn't exist.
+	echo Unable to extract version "%version%" because it isn't downloaded or doesn't exist.
 	echo Make sure to open the launcher and download the version you need to create a pack for.
 	goto endme
 )
 REM zipbat needs a copy of the jar as a zip
 set "mczipdir=%tmpfolder%\%version%.zip"
-if %use7z% neq 1 (
+if %use7z% neq 0 (
 	copy "%mcjardir%" "%tmpfolder%" /Y > nul
 	ren "%tmpfolder%\%version%.jar" "%version%.zip"
 )
 
 REM Determine pack extraction
 :versions
+set "mctp=Extracting files from texture pack  . . . . . . "
+set "mcrp=Extracting files from resource pack . . . . . . "
 if "%version%"=="1.0" goto oldtexturepack
 if "%version%"=="1.1" goto oldtexturepack
 if "%version%"=="1.2.1" goto oldtexturepack
@@ -116,8 +133,8 @@ if "%version%"=="%version%" ( echo Sorry, snapshots, pre-releases, and modded re
 
 REM Extract the correct files from the choosen version
 :oldtexturepack
-echo Extracting %version% texture pack...
-if %use7z% neq 0 (
+echo|set/p"=%mctp%"
+if %use7z% equ 0 (
 	"%_7z%" x "%mcjardir%" -o"%tmpfolder%" pack.png pack.txt particles.png terrain.png font.txt achievement armor art environment font gui item lang misc mob terrain title -r > nul
 ) else (
 	call %zipbat% unZipItem -source "%mczipdir%\pack.png" -destination "%tmpunzip%" && move /Y "%tmpunzip%\pack.png" "%tmpfolder%" > nul
@@ -140,8 +157,8 @@ if %use7z% neq 0 (
 )
 goto zip
 :texturepack
-echo Extracting %version% texture pack...
-if %use7z% neq 0 (
+echo|set/p"=%mctp%"
+if %use7z% equ 0 (
 	"%_7z%" x "%mcjardir%" -o"%tmpfolder%" pack.png pack.txt particles.png font.txt achievement armor art environment font gui item lang misc mob textures title -r > nul
 ) else (
 	call %zipbat% unZipItem -source "%mczipdir%\pack.png" -destination "%tmpunzip%" && move /Y "%tmpunzip%\pack.png" "%tmpfolder%" > nul
@@ -163,8 +180,8 @@ if %use7z% neq 0 (
 )
 goto zip
 :oldresourcepack
-echo Extracting %version% resource pack...
-if %use7z% neq 0 (
+echo|set/p"=%mcrp%"
+if %use7z% equ 0 (
 	"%_7z%" x "%mcjardir%" -o"%tmpfolder%" pack.png pack.mcmeta font.txt assets\minecraft -r > nul
 ) else (
 	call %zipbat% unZipItem -source "%mczipdir%\pack.png" -destination "%tmpunzip%" && move /Y "%tmpunzip%\pack.png" "%tmpfolder%" > nul
@@ -176,8 +193,8 @@ if %use7z% neq 0 (
 )
 goto zip
 :resourcepack
-echo Extracting %version% resource pack...
-if %use7z% neq 0 (
+echo|set/p"=%mcrp%"
+if %use7z% equ 0 (
 	"%_7z%" x "%mcjardir%" -o"%tmpfolder%" pack.png pack.mcmeta assets\minecraft -r > nul
 ) else (
 	call %zipbat% unZipItem -source "%mczipdir%\pack.png" -destination "%tmpunzip%" && move /Y "%tmpunzip%\pack.png" "%tmpfolder%" > nul
@@ -189,23 +206,31 @@ if %use7z% neq 0 (
 
 REM ZIP the files and delete temporary files
 :zip
-echo Done. && echo. && echo Packing into zip file...
-if %use7z% neq 0 (
+echo Done && echo|set/p"=Compressing files into zip file . . . . . . . . "
+if %use7z% equ 0 (
 	"%_7z%" a "%origindir%\MC%version%.zip" "%tmpfolder%\*" > nul
 ) else (
 	if exist "%tmpunzip%" rmdir "%tmpunzip%" /S /Q
 	if exist "%mczipdir%" del "%mczipdir%"
 	call %zipbat% zipDirItems -source "%tmpfolder%" -destination "%origindir%\MC%version%.zip"
 )
-echo Done. && echo. && echo Cleaning up temporary files...
+echo Done && echo|set/p"=Cleaning up temporary files . . . . . . . . . . "
 if exist "%tmpfolder%" rmdir "%tmpfolder%" /S /Q
 if exist "%zipbat%" del "%zipbat%"
-echo Done. && echo.
+echo Done && echo.
 echo Resource/Texture pack located at "%origindir%\MC%version%.zip"
 :endme
 echo. && pause && goto :EOF
 
 
+
+REM .vbs needed for choice prompt if choice command doesn't exist
+:MsgBox prompt type title
+setlocal enableextensions
+set "tmpmsgbox=%tmp%\tmpmsgbox.vbs"
+>"%tmpmsgbox%" echo(WScript.Quit msgBox("%~1",%~2,"%~3") & cscript //nologo //e:vbscript "%tmpmsgbox%"
+set "exitCode=%errorlevel%" & del "%tmpmsgbox%" >nul 2>nul
+endlocal & exit /b %exitCode%
 
 REM Need to create an external batch file for handling zip files
 :createZipBat
