@@ -1,19 +1,22 @@
-@echo off && setlocal
+@echo off
 title Minecraft Pack Extractor
+set "useColor=1" && if [%1]==[0] set "useColor=0" && setlocal
 set "origindir=%cd%"
 set "tmpfolder=%tmp%\mcpackextractor"
 set "tmpunzip=%tmpfolder%\unzip"
 set "_7z=%programfiles%\7-Zip\7z.exe" && set "zipbat=%tmp%\zipjs.bat"
 REM This program is designed to allow unpacking of the default Minecraft resources into a resource/texture pack.
 
-echo. && echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
-echo +             Minecraft Pack Extractor              +
-echo +        Created by TheAlien Drew on GitHub         +
-echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
-echo + https://github.com/TheAlienDrew/MC-Pack-Extractor +
-echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
-echo +         Only supports downloaded releases         +
-echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
+if %useColor% equ 0 ( call :colorBanner "%tmp%" "%origindir%" ) else (
+	echo. && echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
+	echo +             Minecraft Pack Extractor              +
+	echo +         Created by TheAlienDrew on GitHub         +
+	echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
+	echo + https://github.com/TheAlienDrew/MC-Pack-Extractor +
+	echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
+	echo +         Only supports downloaded releases         +
+	echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
+)
 
 REM Delete previous temporary folder if needed
 if exist "%tmpfolder%" ( rmdir "%tmpfolder%" /S /Q && del "%tmpfolder%" >NUL 2>&1 )
@@ -223,6 +226,57 @@ echo Resource/Texture pack located at "%origindir%\MC%version%.zip"
 echo. && pause && goto :EOF
 
 
+
+REM Colored version of my banner
+:colorBanner tempdir origindir
+cd "%~1"
+for /F "tokens=1,2 delims=#" %%a in ('"prompt #$H#$E# & echo on & for %%b in (1) do rem"') do (set "DEL=%%a")
+<nul set /p=""
+echo. &
+call :Colorize 01 "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
+echo. &
+call :Colorize 01 "+"
+call :Colorize 0f "             Minecraft Pack Extractor"
+call :Colorize 01 "              +"
+echo. &
+call :Colorize 01 "+"
+call :Colorize 08 "         Created by"
+call :Colorize 0a " TheAlienDrew"
+call :Colorize 08 " on"
+call :Colorize 05 " GitHub"
+call :Colorize 01 "         +"
+echo. &
+call :Colorize 01 "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
+echo. &
+call :Colorize 01 "+"
+call :Colorize 0b " https"
+echo|set/p"=://"
+call :Colorize 0b "github"
+echo|set/p"=."
+call :Colorize 0b "com"
+echo|set/p"=/"
+call :Colorize 0b "TheAlienDrew"
+echo|set/p"=/"
+call :Colorize 0b "MC-Pack-Extractor"
+call :Colorize 01 " +"
+echo. &
+call :Colorize 01 "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
+echo. &
+call :Colorize 01 "+"
+call :Colorize 04 "         Only supports downloaded releases"
+call :Colorize 01 "         +"
+echo. &
+call :Colorize 01 "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
+echo.
+cd "%~2"
+exit /B
+
+REM Required for colored text
+:Colorize
+<nul set /p "=%DEL%" > "%~2"
+findstr /v /a:%1 /R "+" "%~2" nul
+del "%~2" > nul
+goto :eof
 
 REM .vbs needed for choice prompt if choice command doesn't exist
 :MsgBox prompt type title

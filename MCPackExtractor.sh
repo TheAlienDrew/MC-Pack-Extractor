@@ -1,19 +1,21 @@
 #!/bin/bash
 echo -e '\033]2;'Minecraft Pack Extractor'\007'
+nocolor='\e[0m' && lighten='\e[1m' && white='\e[37m' && black='\e[30m' && cyan='\e[36m' && magenta='\e[35m' && blue='\e[34m' && green='\e[32m' && red='\e[31m' && useColor=1 && if [ "$1" = "0" ]; then useColor=0; fi
 origindir=$PWD
 tmpfolder="/tmp/mcpackextractor"
-version=
+version=""
 os="$(uname -s)" && pause="Press any key to continue . . . "
 # This program is designed to allow unpacking of the default Minecraft resources into a resource/texture pack.
 
+if ! [ "${useColor}" = "0" ]; then lighten=$nocolor && white=$nocolor && black=$nocolor && cyan=$nocolor && magenta=$nocolor && blue=$nocolor && green=$nocolor && red=$nocolor; fi
+echo -e "${blue}+++++++++++++++++++++++++++++++++++++++++++++++++++++"
+echo -e "+             ${lighten}${white}Minecraft Pack Extractor              ${nocolor}${blue}+"
+echo -e "+         ${lighten}${black}Created by ${green}TheAlienDrew ${black}on ${nocolor}${magenta}GitHub         ${blue}+"
 echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
-echo -e "+             Minecraft Pack Extractor              +"
-echo -e "+ https://github.com/TheAlienDrew/MC-Pack-Extractor +"
+echo -e "+ ${lighten}${cyan}https${white}://${cyan}github${white}.${cyan}com${white}/${cyan}TheAlienDrew${white}/${cyan}MC-Pack-Extractor ${nocolor}${blue}+"
 echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
-echo -e "+    Created by https://github.com/TheAlienDrew/    +"
-echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
-echo -e "+       * Only supports downloaded releases *       +"
-echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
+echo -e "+         ${red}Only supports downloaded releases         ${blue}+"
+echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++${nocolor}"
 
 # Delete previous temporary folder if needed
 if [ ! -f ${tmpfolder} ]; then rm -rf "$tmpfolder"; fi
