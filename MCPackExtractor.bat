@@ -7,6 +7,7 @@ set "tmpunzip=%tmpfolder%\unzip"
 set "_7z=%programfiles%\7-Zip\7z.exe" && set "zipbat=%tmp%\zipjs.bat"
 REM This program is designed to allow unpacking of the default Minecraft resources into a resource/texture pack.
 
+:main
 if %useColor% equ 0 ( call :colorBanner "%tmp%" "%origindir%" ) else (
 	echo. && echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
 	echo +             Minecraft Pack Extractor              +
@@ -221,6 +222,7 @@ echo Done && echo.
 echo Resource/Texture pack located at "%origindir%\MC%version%.zip"
 :endme
 echo. && pause && goto :EOF
+:mainEnd
 
 
 
