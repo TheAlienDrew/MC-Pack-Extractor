@@ -8,7 +8,7 @@ os="$(uname -s)" && pause="Press any key to continue . . . "
 # This program is designed to allow unpacking of the default Minecraft resources into a resource/texture pack.
 
 main() {
-	if ! [ "${useColor}" = "0" ]; then colorBanner; else
+	if ! [ "${useColor}" = "1" ]; then colorBanner; else
 		echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
 		echo -e "+             Minecraft Pack Extractor              +"
 		echo -e "+         Created by TheAlienDrew on GitHub         +"
