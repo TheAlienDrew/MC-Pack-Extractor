@@ -26,15 +26,12 @@ set /A use7z=0 && if not exist "%_7z%" set /A use7z=1
 set "no7z=Would you like to use the system's zip/unzip instead (Y/N)?"
 if %use7z% neq 0 (
 	echo.
-	if "%os%"=="Windows_NT" (
-		echo 7-Zip isn't installed, but you can install it by going to "https://www.7-zip.org/download.html"
-	) else (
-		echo Sorry, but %os% is not supported.
-		goto endme
+	if "%os%"=="Windows_NT" ( echo 7-Zip isn't installed, but you can install it by going to "https://www.7-zip.org/download.html" ) else (
+		echo Sorry, but %os% is not supported. && goto endme
 	)
+	echo.
 	where choice >NUL 2>&1
 	if errorlevel 1 (
-		echo.
 		call :MsgBox "%no7z%" "VBYesNo+VBQuestion" "Continue?"
 		if errorlevel 7 (
 			echo|set/p"=%no7z% N"
@@ -43,7 +40,10 @@ if %use7z% neq 0 (
 			echo|set/p"=%no7z% Y"
 			echo. && call :createZipBat
 		)
-	) else echo. && choice /N /M "%no7z% " && if errorlevel 2 ( goto :EOF ) else if errorlevel 1 ( call :createZipBat ) else goto :EOF
+	) else (
+		choice /N /M "%no7z% "
+		if errorlevel 2 ( goto :EOF ) else if errorlevel 1 ( call :createZipBat ) else goto :EOF
+	)
 	mkdir "%tmpfolder%" && mkdir "%tmpunzip%"
 )
 echo. && echo. && echo.
@@ -66,10 +66,7 @@ if not exist "%mcjardir%" (
 )
 REM zipbat needs a copy of the jar as a zip
 set "mczipdir=%tmpfolder%\%version%.zip"
-if %use7z% neq 0 (
-	copy "%mcjardir%" "%tmpfolder%" /Y > nul
-	ren "%tmpfolder%\%version%.jar" "%version%.zip"
-)
+if %use7z% neq 0 copy "%mcjardir%" "%tmpfolder%\%version%.zip" /Y > nul
 
 REM Determine pack extraction
 :versions
