@@ -36,7 +36,7 @@ main() {
 			read -n 1 -s -r -p "$pause" && echo && echo && exit
 		fi
 		echo
-		read -n 1 -s -r -p "Would you like to use the system's zip/unzip instead (Y/N)? " choice
+		read -n 1 -s -r -p "Would you like to use the built-in zip/unzip instead (Y/N)? " choice
 		while ! { [ "$choice" = "Y" ] || [ "$choice" = "y" ] || [ "$choice" = "N" ] || [ "$choice" = "n" ]; }; do
 			read -n 1 -s -r choice
 		done

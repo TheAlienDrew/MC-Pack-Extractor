@@ -24,7 +24,7 @@ if exist "%tmpfolder%" ( rmdir "%tmpfolder%" /S /Q && del "%tmpfolder%" >NUL 2>&
 
 REM No 7-Zip = Use internal batch file courtesy of npocmaka: https://github.com/npocmaka/batch.scripts/blob/master/hybrids/jscript/zipjs.bat
 set /A use7z=0 && if not exist "%_7z%" set /A use7z=1
-set "no7z=Would you like to use the system's zip/unzip instead (Y/N)?"
+set "no7z=Would you like to use the built-in zip/unzip instead (Y/N)?"
 if %use7z% neq 0 (
 	echo.
 	if "%os%"=="Windows_NT" ( echo 7-Zip isn't installed, but you can install it by going to "https://www.7-zip.org/download.html" ) else (
