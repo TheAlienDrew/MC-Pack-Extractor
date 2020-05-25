@@ -1,3 +1,18 @@
+REM This program is designed to allow unpacking of the default Minecraft resources into a resource/texture pack.
+REM Copyright (C) 2020  Andrew Larson (thealiendrew@gmail.com)
+REM
+REM This program is free software: you can redistribute it and/or modify
+REM it under the terms of the GNU General Public License as published by
+REM the Free Software Foundation, either version 3 of the License, or
+REM (at your option) any later version.
+REM
+REM This program is distributed in the hope that it will be useful,
+REM but WITHOUT ANY WARRANTY; without even the implied warranty of
+REM MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+REM GNU General Public License for more details.
+REM
+REM You should have received a copy of the GNU General Public License
+REM along with this program.  If not, see <https://www.gnu.org/licenses/>.
 @echo off
 title Minecraft Pack Extractor
 set "useColor=1" && if [%1]==[0] set "useColor=0" && setlocal
@@ -5,7 +20,6 @@ set "origindir=%cd%"
 set "tmpfolder=%tmp%\mcpackextractor"
 set "tmpunzip=%tmpfolder%\unzip"
 set "_7z=%programfiles%\7-Zip\7z.exe" && set "zipbat=%tmp%\zipjs.bat"
-REM This program is designed to allow unpacking of the default Minecraft resources into a resource/texture pack.
 
 :main
 if %useColor% equ 0 ( call :colorBanner "%tmp%" "%origindir%" ) else (
