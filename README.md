@@ -6,8 +6,7 @@ COMPATIBILITY: Windows, Mac, & Linux!
 
 * Features still left to implement:
   1. Extract sounds with the packs... For now just use [this](https://minecraft.gamepedia.com/Tutorials/Sound_directory)
-  2. Support for Minecraft: Bedrock Edition 
-  - Probably going to achive this when I program these features to my [MC Pack Workbench](https://thealiendrew.github.io/mcpw)
+  2. Support for Minecraft: Bedrock Edition
 
 Links:
   - [Minecraft Forum (old)](https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/resource-packs/resource-pack-discussion/2962634-script-minecraft-default-pack-extractor)
